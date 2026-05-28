@@ -1,3 +1,9 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="ConsultingCompany.API/ConsultingCompany.API.csproj" />
+  <Project Path="ConsultingCompany.BLL/ConsultingCompany.BLL.csproj" Id="b4534293-f699-4932-a334-1982a98a0c2d" />
+  <Project Path="ConsultingCompany.DAL/ConsultingCompany.DAL.csproj" Id="26dbfca0-d26b-48b8-9a40-1b6e07a23368" />
+  <Project Path="ConsultingCompany.Shared/ConsultingCompany.Shared.csproj" Id="431f9610-387b-4c36-89ca-6d1b88bb5efa" />
 </Solution>
