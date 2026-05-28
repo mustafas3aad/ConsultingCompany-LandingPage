@@ -1,0 +1,24 @@
+[
+  {
+    "FullName": "Ahmed Mohamed",
+    "Email": "ahmed@example.com",
+    "Phone": "+201001234567",
+    "CompanyName": "Tech Solutions LLC",
+    "Message": "We are looking for strategic consulting to expand our business.",
+    "Status": "Pending",
+    "IsRead": false,
+    "ServiceId": 1,
+    "CreatedAt": "2024-03-01T10:00:00"
+  },
+  {
+    "FullName": "Sara Ali",
+    "Email": "sara@example.com",
+    "Phone": "+201009876543",
+    "CompanyName": "Finance Corp",
+    "Message": "Need financial advisory for our upcoming investment plans.",
+    "Status": "Pending",
+    "IsRead": false,
+    "ServiceId": 2,
+    "CreatedAt": "2024-03-05T09:00:00"
+  }
+]
