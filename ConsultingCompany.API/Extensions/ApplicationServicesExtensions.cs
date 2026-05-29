@@ -30,10 +30,9 @@ namespace ConsultingCompany.API.Extensions
            services.AddScoped<IDataInitializer, DataInitializer>();
            services.AddScoped<IConsultationService,ConsultationService>();
            services.AddAutoMapper(X => X.AddProfile<ConsultationRequestProfile>(), typeof(ConsultationRequestProfile).Assembly);
-
-
-
-            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+           services.AddAutoMapper(X => X.AddProfile<NewsletterSubscriberProfile>(), typeof(NewsletterSubscriberProfile).Assembly);
+           services.AddScoped<INewsletterSubscriberService,NewsletterSubscriberService>();
+           services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
            services.AddCors(options =>
             {
