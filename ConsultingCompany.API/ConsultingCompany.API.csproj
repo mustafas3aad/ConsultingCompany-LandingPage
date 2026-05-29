@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" Version="10.0.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -21,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsultingCompany.BLL\ConsultingCompany.BLL.csproj" />
-    <ProjectReference Include="..\ConsultingCompany.DAL\ConsultingCompany.DAL.csproj" />
+    <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
   </ItemGroup>
 
 </Project>

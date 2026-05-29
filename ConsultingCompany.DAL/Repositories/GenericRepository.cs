@@ -1,11 +1,8 @@
-﻿using ConsultingCompany.BLL.Contracts.Repositories;
-using ConsultingCompany.BLL.Contracts.Specifications;
-using ConsultingCompany.DAL.Data.Context;
+﻿using ConsultingCompany.DAL.Data.Context;
+using ConsultingCompany.DAL.Repositories.IRepositories;
 using ConsultingCompany.DAL.Specifications;
+using ConsultingCompany.DAL.Specifications.ISpecifications;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsultingCompany.DAL.Repositories
 {

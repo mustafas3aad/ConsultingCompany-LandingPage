@@ -1,8 +1,5 @@
-﻿using ConsultingCompany.BLL.Contracts.Specifications;
+﻿using ConsultingCompany.DAL.Specifications.ISpecifications;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsultingCompany.DAL.Specifications
 {

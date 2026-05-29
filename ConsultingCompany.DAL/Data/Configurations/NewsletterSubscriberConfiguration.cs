@@ -11,7 +11,13 @@ namespace ConsultingCompany.DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<NewsletterSubscriber> builder)
         {
-            builder.ToTable("NewsletterSubscribers");
+            builder.ToTable("NewsletterSubscribers", Tb =>
+            {
+                Tb.HasCheckConstraint(
+                    "CK_NewsletterSubscriber_Email",
+                    "Email LIKE '_%@_%._%'"
+                );
+            });
 
             builder.HasKey(x => x.Id);
 

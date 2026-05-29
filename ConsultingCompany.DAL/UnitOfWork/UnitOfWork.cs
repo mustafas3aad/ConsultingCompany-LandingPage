@@ -1,10 +1,6 @@
-﻿using ConsultingCompany.BLL.Contracts.IUnitOfWork;
-using ConsultingCompany.BLL.Contracts.Repositories;
-using ConsultingCompany.DAL.Data.Context;
+﻿using ConsultingCompany.DAL.Data.Context;
 using ConsultingCompany.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ConsultingCompany.DAL.Repositories.IRepositories;
 
 namespace ConsultingCompany.DAL.UnitOfWork
 {

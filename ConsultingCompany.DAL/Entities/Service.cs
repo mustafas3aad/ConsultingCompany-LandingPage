@@ -22,10 +22,6 @@ namespace ConsultingCompany.DAL.Entities
         public string Description { get; set; } = default!;
 
         [Required]
-        [MaxLength(100)]
-        public string IconName { get; set; } = default!;
-
-        [Required]
         public bool IsActive { get; set; } = true;
 
         public ICollection<ConsultationRequest> ConsultationRequests { get; set; } = new List<ConsultationRequest>();

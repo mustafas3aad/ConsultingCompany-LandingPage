@@ -11,7 +11,18 @@ namespace ConsultingCompany.DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ConsultationRequest> builder)
         {
-            builder.ToTable("ConsultationRequests");
+            builder.ToTable("ConsultationRequests", Tb =>
+            {
+                Tb.HasCheckConstraint(
+                    "CK_ConsultationRequest_Phone",
+                    "Phone LIKE '01[0125][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'"
+                );
+
+                Tb.HasCheckConstraint(
+                    "CK_ConsultationRequest_Email",
+                    "Email LIKE '_%@_%._%'"
+                );
+            });
 
             builder.HasKey(x => x.Id);
 

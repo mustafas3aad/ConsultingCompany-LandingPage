@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace ConsultingCompany.BLL.Contracts.Specifications
+namespace ConsultingCompany.DAL.Specifications.ISpecifications
 {
     public interface ISpecifications<TEntity> where TEntity : class
     {
