@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsultingCompany.DAL\ConsultingCompany.DAL.csproj" />
-    <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
+    <Compile Remove="Specifications\**" />
+    <EmbeddedResource Remove="Specifications\**" />
+    <None Remove="Specifications\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Specifications\" />
+    <ProjectReference Include="..\ConsultingCompany.DAL\ConsultingCompany.DAL.csproj" />
+    <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
