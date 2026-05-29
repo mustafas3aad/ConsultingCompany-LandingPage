@@ -16,20 +16,22 @@ await app.SeedDatabaseAsync();
 
 #endregion Data Seeding
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    //app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+
+ app.UseSwagger();
+
+ app.UseSwaggerUI(option =>
+ {
+    option.SwaggerEndpoint("/swagger/v1/swagger.json", "Consulting Company API v1");
+    option.SwaggerEndpoint("/swagger/v2/swagger.json", "Consulting Company API v2");
+ });
+
 
 app.UseCors("AllowAll");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-//app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.Run();

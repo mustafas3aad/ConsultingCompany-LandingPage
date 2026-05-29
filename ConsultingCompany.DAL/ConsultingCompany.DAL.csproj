@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsultingCompany.BLL\ConsultingCompany.BLL.csproj" />
+    <Folder Include="Data\DataSeed\JSONFiles\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\DataSeed\JSONFiles\" />
+    <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
   </ItemGroup>
 
 </Project>

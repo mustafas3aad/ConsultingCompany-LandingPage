@@ -1,5 +1,4 @@
-﻿using ConsultingCompany.BLL.Contracts.IDataInitializer;
-using ConsultingCompany.DAL.Data.Context;
+﻿using ConsultingCompany.DAL.Data.Context;
 using ConsultingCompany.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;

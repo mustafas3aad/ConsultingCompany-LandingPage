@@ -21,7 +21,6 @@ namespace ConsultingCompany.DAL.Data.Configurations
             builder.Property(x => x.Name)
                    .IsRequired()
                    .HasMaxLength(150);
-
           
             builder.HasIndex(x => x.Name)
                    .IsUnique();
@@ -29,10 +28,6 @@ namespace ConsultingCompany.DAL.Data.Configurations
             builder.Property(x => x.Description)
                    .IsRequired()
                    .HasMaxLength(1000);
-
-            builder.Property(x => x.IconName)
-                   .IsRequired()
-                   .HasMaxLength(100);
 
             builder.Property(x => x.IsActive)
                    .IsRequired()

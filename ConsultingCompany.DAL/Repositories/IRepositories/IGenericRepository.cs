@@ -1,9 +1,6 @@
-﻿using ConsultingCompany.BLL.Contracts.Specifications;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ConsultingCompany.DAL.Specifications.ISpecifications;
 
-namespace ConsultingCompany.BLL.Contracts.Repositories
+namespace ConsultingCompany.DAL.Repositories.IRepositories
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\IServices\" />
+    <ProjectReference Include="..\ConsultingCompany.DAL\ConsultingCompany.DAL.csproj" />
+    <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Specifications\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
   </ItemGroup>
 
 </Project>

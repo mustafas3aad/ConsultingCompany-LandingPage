@@ -1,11 +1,14 @@
-﻿using ConsultingCompany.BLL.Contracts.IDataInitializer;
-using ConsultingCompany.BLL.Contracts.IUnitOfWork;
-using ConsultingCompany.BLL.Contracts.Repositories;
+﻿using Asp.Versioning;
+using ConsultingCompany.BLL.Contracts.Services;
+using ConsultingCompany.BLL.Mapping;
+using ConsultingCompany.BLL.Services;
 using ConsultingCompany.DAL.Data.Context;
 using ConsultingCompany.DAL.Data.DataSeed;
 using ConsultingCompany.DAL.Repositories;
+using ConsultingCompany.DAL.Repositories.IRepositories;
 using ConsultingCompany.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 
 namespace ConsultingCompany.API.Extensions
 {
@@ -25,8 +28,12 @@ namespace ConsultingCompany.API.Extensions
 
            services.AddScoped<IUnitOfWork, UnitOfWork>();
            services.AddScoped<IDataInitializer, DataInitializer>();
+           services.AddScoped<IConsultationService,ConsultationService>();
+           services.AddAutoMapper(X => X.AddProfile<ConsultationRequestProfile>(), typeof(ConsultationRequestProfile).Assembly);
 
-           services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+
+
+            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
            services.AddCors(options =>
             {
@@ -40,11 +47,36 @@ namespace ConsultingCompany.API.Extensions
                     });
             });
 
-
+            services.AddApiVersioning(options =>
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
+            })
+             .AddApiExplorer(options =>
+             {
+                 options.GroupNameFormat = "'v'VVV";
+                 options.SubstituteApiVersionInUrl = true;
+             });
 
             services.AddEndpointsApiExplorer();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Consulting Company API",
+                    Version = "v1",
+                    Description = "API for managing consulting company data (v1)"
+                });
+
+                options.SwaggerDoc("v2", new OpenApiInfo
+                {
+                    Title = "Consulting Company API",
+                    Version = "v2",
+                    Description = "API for managing consulting company data (v2 - updated)"
+                });
+            });
 
             return services;
         }

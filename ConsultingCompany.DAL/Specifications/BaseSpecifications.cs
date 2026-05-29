@@ -1,10 +1,7 @@
-﻿using ConsultingCompany.BLL.Contracts.Specifications;
-using System;
-using System.Collections.Generic;
+﻿using ConsultingCompany.DAL.Specifications.ISpecifications;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace ConsultingCompany.BLL.Specifications
+namespace ConsultingCompany.DAL.Specifications
 {
     public abstract class BaseSpecifications<TEntity> : ISpecifications<TEntity> where TEntity : class
     {
