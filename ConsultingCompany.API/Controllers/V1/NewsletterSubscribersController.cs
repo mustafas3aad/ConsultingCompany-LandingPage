@@ -1,10 +1,7 @@
 ﻿using Asp.Versioning;
-using ConsultingCompany.API.Base;
 using ConsultingCompany.BLL.Contracts.Services;
 using ConsultingCompany.BLL.DTOs.NewsletterSubscribers;
-using ConsultingCompany.Shared.Responses;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace ConsultingCompany.API.Controllers.V1
 {
@@ -13,7 +10,7 @@ namespace ConsultingCompany.API.Controllers.V1
     [ApiVersion("1.0")]
 
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class NewsletterSubscribersController : AppControllerBase  
+    public class NewsletterSubscribersController : ControllerBase 
     {
         private readonly INewsletterSubscriberService _newsletterSubscriberService; 
         public NewsletterSubscribersController(INewsletterSubscriberService newsletterSubscriberService)    
@@ -26,16 +23,8 @@ namespace ConsultingCompany.API.Controllers.V1
         public async Task<IActionResult> Create([FromBody] CreateNewsletterSubscriberDto dto)   
         {
             var createdId = await _newsletterSubscriberService.CreateAsync(dto);
-            
-            var response = new Response<int>
-            {
-                StatusCode = HttpStatusCode.Created,
-                Succeeded = true,
-                Message = "Subscribed successfully",
-                Data = createdId
-            };
+            return Ok(new { id = createdId });
 
-            return NewResult(response);
         }
     }
 }
