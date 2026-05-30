@@ -25,7 +25,26 @@ namespace ConsultingCompany.API.MiddleWares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Something went wrong: {Message}", ex.Message);
+                switch (ex)
+                {
+                    case NotFoundException:
+                    case ConflictException:
+                    case BadRequestException:
+                    case ValidationException:
+                        _logger.LogWarning(
+                            "Business Exception: {ExceptionType} - {Message}",
+                            ex.GetType().Name,
+                            ex.Message);
+                        break;
+
+                    default:
+                        _logger.LogError(ex,
+                            "Unhandled Exception: {ExceptionType} - {Message}",
+                            ex.GetType().Name,
+                            ex.Message);
+                        break;
+                }
+
                 await HandleExceptionAsync(httpContext, ex);
             }
         }

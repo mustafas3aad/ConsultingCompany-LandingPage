@@ -5,6 +5,7 @@ using ConsultingCompany.BLL.Exceptions;
 using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Enums;
 using ConsultingCompany.DAL.UnitOfWork;
+using Microsoft.Extensions.Logging;
 
 namespace ConsultingCompany.BLL.Services
 {
@@ -12,14 +13,19 @@ namespace ConsultingCompany.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
         public ConsultationService(
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<ConsultationService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
+
+        public ILogger<ConsultationService> Logger { get; }
 
         public async Task<int> CreateAsync(CreateConsultationRequestDto dto)
         {
@@ -46,6 +52,8 @@ namespace ConsultingCompany.BLL.Services
 
             await _unitOfWork.SaveChangesAsync();
 
+            _logger.LogInformation("Consultation created successfully with Id: {Id}",consultation.Id);
+    
             return consultation.Id;
         }
     }
