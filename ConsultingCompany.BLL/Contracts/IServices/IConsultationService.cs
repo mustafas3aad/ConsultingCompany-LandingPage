@@ -1,5 +1,4 @@
 ﻿using ConsultingCompany.BLL.DTOs.ConsultationRequests;
-using ConsultingCompany.Shared.Responses;
 
 namespace ConsultingCompany.BLL.Contracts.Services
 {

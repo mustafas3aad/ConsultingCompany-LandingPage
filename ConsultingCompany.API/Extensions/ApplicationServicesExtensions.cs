@@ -1,5 +1,5 @@
 ﻿using Asp.Versioning;
-using ConsultingCompany.BLL.Contracts;
+using ConsultingCompany.API.Factories;
 using ConsultingCompany.BLL.Contracts.Services;
 using ConsultingCompany.BLL.Mapping;
 using ConsultingCompany.BLL.Services;
@@ -8,7 +8,9 @@ using ConsultingCompany.DAL.Data.DataSeed;
 using ConsultingCompany.DAL.Repositories;
 using ConsultingCompany.DAL.Repositories.IRepositories;
 using ConsultingCompany.DAL.UnitOfWork;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 
 namespace ConsultingCompany.API.Extensions
@@ -32,11 +34,16 @@ namespace ConsultingCompany.API.Extensions
            services.AddScoped<IConsultationService,ConsultationService>();
            services.AddAutoMapper(X => X.AddProfile<ConsultationRequestProfile>(), typeof(ConsultationRequestProfile).Assembly);
            services.AddAutoMapper(X => X.AddProfile<NewsletterSubscriberProfile>(), typeof(NewsletterSubscriberProfile).Assembly);
-            services.AddAutoMapper(X => X.AddProfile<ServiceProfile>(), typeof(ServiceProfile).Assembly);
-            services.AddScoped<INewsletterSubscriberService,NewsletterSubscriberService>();
+           services.AddAutoMapper(X => X.AddProfile<ServiceProfile>(), typeof(ServiceProfile).Assembly);
+           services.AddScoped<INewsletterSubscriberService,NewsletterSubscriberService>();
            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
            services.AddScoped<IServiceService, ServiceService>();
-   
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse;
+            });
+
 
             services.AddCors(options =>
             {

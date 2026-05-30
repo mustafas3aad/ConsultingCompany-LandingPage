@@ -1,3 +1,4 @@
+using ConsultingCompany.API.MiddleWares;
 using ConsultingCompany.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
+
+
 #region Data Seeding
 
 await app.MigrateDatabaseAsync();
@@ -16,8 +19,9 @@ await app.SeedDatabaseAsync();
 
 #endregion Data Seeding
 
+app.UseMiddleware<ExceptionMiddleware>();
 
- app.UseSwagger();
+app.UseSwagger();
 
  app.UseSwaggerUI(option =>
  {
