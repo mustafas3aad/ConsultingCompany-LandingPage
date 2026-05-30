@@ -1,10 +1,12 @@
 ﻿using Asp.Versioning;
 using ConsultingCompany.API.Factories;
+using ConsultingCompany.BLL.Contracts.IEmailService;
 using ConsultingCompany.BLL.Contracts.Services;
 using ConsultingCompany.BLL.Mapping;
 using ConsultingCompany.BLL.Services;
 using ConsultingCompany.DAL.Data.Context;
 using ConsultingCompany.DAL.Data.DataSeed;
+using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Repositories;
 using ConsultingCompany.DAL.Repositories.IRepositories;
 using ConsultingCompany.DAL.UnitOfWork;
@@ -39,6 +41,7 @@ namespace ConsultingCompany.API.Extensions
            services.AddScoped<INewsletterSubscriberService,NewsletterSubscriberService>();
            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
            services.AddScoped<IServiceService, ServiceService>();
+           services.AddScoped<IEmailService, EmailService>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
