@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using ConsultingCompany.BLL.Contracts.IEmailService;
 using ConsultingCompany.BLL.Contracts.Services;
 using ConsultingCompany.BLL.DTOs.NewsletterSubscribers;
 using ConsultingCompany.BLL.Exceptions;
-using ConsultingCompany.BLL.Exceptions.Base;
+using ConsultingCompany.BLL.Templates;
 using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Specifications.NewsletterSubscribers;
 using ConsultingCompany.DAL.UnitOfWork;
@@ -14,13 +15,16 @@ namespace ConsultingCompany.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
         public NewsletterSubscriberService(
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<int> CreateAsync(CreateNewsletterSubscriberDto dto)  
@@ -48,6 +52,9 @@ namespace ConsultingCompany.BLL.Services
 
             await _unitOfWork.SaveChangesAsync();
 
+            await _emailService.SendEmailAsync(dto.Email,"Welcome to Our Newsletter!",
+                                EmailTemplates.NewsletterSubscriptionConfirmation(dto.Email));
+    
             return subscriber.Id;
         }
     }
