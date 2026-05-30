@@ -1,9 +1,13 @@
-using ConsultingCompany.API.MiddleWares;
 using ConsultingCompany.API.Extensions;
+using ConsultingCompany.API.MiddleWares;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Host.UseSerilog((context, config) =>
+    config.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
@@ -18,6 +22,9 @@ await app.MigrateDatabaseAsync();
 await app.SeedDatabaseAsync();
 
 #endregion Data Seeding
+
+
+app.UseSerilogRequestLogging();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
