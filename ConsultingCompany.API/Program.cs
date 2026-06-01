@@ -34,6 +34,17 @@ app.UseSerilogRequestLogging();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger");
+        return;
+    }
+
+    await next();
+});
+
 app.UseSwagger();
 
  app.UseSwaggerUI(option =>
@@ -50,5 +61,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
