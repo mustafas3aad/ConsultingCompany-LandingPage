@@ -7,6 +7,8 @@ using ConsultingCompany.BLL.Templates;
 using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Specifications.NewsletterSubscribers;
 using ConsultingCompany.DAL.UnitOfWork;
+using ConsultingCompany.Shared.Localization;
+using Microsoft.Extensions.Localization;
 
 namespace ConsultingCompany.BLL.Services
 {
@@ -16,15 +18,18 @@ namespace ConsultingCompany.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
         public NewsletterSubscriberService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IEmailService emailService)
+            IEmailService emailService,
+            IStringLocalizer<SharedResource> localizer)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _emailService = emailService;
+            _localizer = localizer;
         }
 
         public async Task<int> CreateAsync(CreateNewsletterSubscriberDto dto)  
@@ -37,7 +42,10 @@ namespace ConsultingCompany.BLL.Services
                 .GetByIdAsync(spec);
 
             if (existingSubscriber is not null)
-                throw new EmailAlreadySubscribedException(dto.Email);
+            {
+                throw new EmailAlreadySubscribedException(
+                    _localizer[SharedResourcesKeys.EmailAlreadySubscribed]);
+            }
 
             var subscriber =
                 _mapper.Map<NewsletterSubscriber>(dto);
@@ -52,7 +60,7 @@ namespace ConsultingCompany.BLL.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            await _emailService.SendEmailAsync(dto.Email,"Welcome to Our Newsletter!",
+            await _emailService.SendEmailAsync(dto.Email, _localizer[SharedResourcesKeys.NewsletterEmailSubject],
                                 EmailTemplates.NewsletterSubscriptionConfirmation(dto.Email));
     
             return subscriber.Id;

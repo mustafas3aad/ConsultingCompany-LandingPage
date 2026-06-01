@@ -13,12 +13,9 @@ namespace ConsultingCompany.BLL.DTOs.ConsultationRequests
         public string Email { get; set; } = default!;
 
         [Required]
-        public string Phone { get; set; } = default!;
-
-        [Required]
         public string CompanyName { get; set; } = default!;
 
-        [Required]
+       
         public string Message { get; set; } = default!;
 
         [Required]

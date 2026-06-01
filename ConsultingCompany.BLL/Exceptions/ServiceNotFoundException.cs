@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ConsultingCompany.BLL.Exceptions
 {
-    public class ServiceNotFoundException(int id)
-    : NotFoundException($"Service with id {id} is not found")
+    public class ServiceNotFoundException(string message)
+    : NotFoundException(message)
     {
     }
 }

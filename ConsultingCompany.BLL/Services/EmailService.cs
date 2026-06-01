@@ -1,6 +1,7 @@
 ﻿using ConsultingCompany.BLL.Contracts.IEmailService;
 using ConsultingCompany.Shared.Utility;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,8 +10,10 @@ using System.Text;
 
 namespace ConsultingCompany.BLL.Services
 {
-    public class EmailService(IConfiguration configuration) : IEmailService
+    public class EmailService(IConfiguration configuration, ILogger<EmailService> logger) : IEmailService
     {
+        private readonly ILogger<EmailService> _logger = logger;
+
         public async Task<bool> SendEmailAsync(string to, string subject, string body)
         {
             try
@@ -27,7 +30,7 @@ namespace ConsultingCompany.BLL.Services
 
                 var mailMessage = new MailMessage
                 {
-                    From = new MailAddress(configuration["EmailSettings:FromEmail"],SD.CompanyName),
+                    From = new MailAddress(configuration["EmailSettings:FromEmail"]!,SD.CompanyName),
                     Subject = subject,
                     Body = body,
                     IsBodyHtml = true
@@ -41,7 +44,7 @@ namespace ConsultingCompany.BLL.Services
             catch (Exception ex)
             {
 
-                Console.WriteLine("Email send failed: " + ex.Message);
+                _logger.LogError( ex,"Failed to send email to {Email}",to); 
                 return false;
             }
         }

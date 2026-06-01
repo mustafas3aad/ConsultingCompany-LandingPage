@@ -10,11 +10,13 @@ using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Repositories;
 using ConsultingCompany.DAL.Repositories.IRepositories;
 using ConsultingCompany.DAL.UnitOfWork;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using Serilog;
+using System.Globalization;
 
 namespace ConsultingCompany.API.Extensions
 {
@@ -91,6 +93,36 @@ namespace ConsultingCompany.API.Extensions
                     Description = "API for managing consulting company data (v2 - updated)"
                 });
             });
+
+
+            #region Localization
+
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Localization/Resources";
+            });
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                    {
+                        new("en"),
+                        new("ar")
+                    };
+
+                options.DefaultRequestCulture =
+                    new RequestCulture("en");
+
+                options.SupportedCultures =
+                    supportedCultures;
+
+                options.SupportedUICultures =
+                    supportedCultures;
+
+                options.ApplyCurrentCultureToResponseHeaders = true;
+            });
+
+            #endregion
 
             return services;
         }
