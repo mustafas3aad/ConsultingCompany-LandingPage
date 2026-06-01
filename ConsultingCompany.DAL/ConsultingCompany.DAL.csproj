@@ -19,4 +19,16 @@
     <ProjectReference Include="..\ConsultingCompany.Shared\ConsultingCompany.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\DataSeed\JSONFiles\Consultationrequests.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\DataSeed\JSONFiles\Newslettersubscribers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\DataSeed\JSONFiles\Services.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
