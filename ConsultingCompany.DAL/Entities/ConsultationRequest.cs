@@ -25,17 +25,12 @@ namespace ConsultingCompany.DAL.Entities
         public string Email { get; set; } = default!;
 
         [Required]
-        [MaxLength(20)]
-        [Phone]
-        public string Phone { get; set; } = default!;
-
-        [Required]
         [MaxLength(200)]
         public string CompanyName { get; set; } = default!;
 
-        [Required]
+        
         [MaxLength(2000)]
-        public string Message { get; set; } = default!;
+        public string? Message { get; set; } = default!;
 
         [Required]
         public ConsultationStatus Status { get; set; }

@@ -1,5 +1,6 @@
 using ConsultingCompany.API.Extensions;
 using ConsultingCompany.API.MiddleWares;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,11 @@ await app.MigrateDatabaseAsync();
 await app.SeedDatabaseAsync();
 
 #endregion Data Seeding
+
+
+var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+
+app.UseRequestLocalization(locOptions.Value);
 
 
 app.UseSerilogRequestLogging();

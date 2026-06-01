@@ -7,6 +7,8 @@ using ConsultingCompany.BLL.Templates;
 using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Enums;
 using ConsultingCompany.DAL.UnitOfWork;
+using ConsultingCompany.Shared.Localization;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace ConsultingCompany.BLL.Services
@@ -17,17 +19,20 @@ namespace ConsultingCompany.BLL.Services
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IEmailService _emailService;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
         public ConsultationService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             ILogger<ConsultationService> logger,
-            IEmailService emailService)
+            IEmailService emailService,
+            IStringLocalizer<SharedResource> localizer)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
             _emailService = emailService;
+            _localizer = localizer;
         }
 
        
@@ -40,7 +45,10 @@ namespace ConsultingCompany.BLL.Services
                                 .GetByIdAsync(dto.ServiceId);
 
             if (serviceExists is null)
-                throw new ServiceNotFoundException(dto.ServiceId);
+            {
+                throw new ServiceNotFoundException(
+                    _localizer[SharedResourcesKeys.ServiceNotFound]);
+            }
 
             var consultation =
                 _mapper.Map<ConsultationRequest>(dto);
@@ -57,7 +65,7 @@ namespace ConsultingCompany.BLL.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            await _emailService.SendEmailAsync(dto.Email,"Consultation Request Confirmation",
+            await _emailService.SendEmailAsync(dto.Email, _localizer["ConsultationEmailSubject"],
                                 EmailTemplates.ConsultationRequestConfirmation(dto.FullName, dto.CompanyName, serviceExists.Name));
     
             _logger.LogInformation("Consultation created successfully with Id: {Id}",consultation.Id);

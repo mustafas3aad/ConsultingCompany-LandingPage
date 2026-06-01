@@ -21,7 +21,11 @@ namespace ConsultingCompany.DAL.Data.Configurations
             builder.Property(x => x.Name)
                    .IsRequired()
                    .HasMaxLength(150);
-          
+
+            builder.Property(x => x.NameAr)
+                   .IsRequired()
+                   .HasMaxLength(150);
+
             builder.HasIndex(x => x.Name)
                    .IsUnique();
 

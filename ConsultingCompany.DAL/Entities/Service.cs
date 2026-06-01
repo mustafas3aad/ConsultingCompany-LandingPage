@@ -16,6 +16,9 @@ namespace ConsultingCompany.DAL.Entities
         [Required]
         [MaxLength(150)]
         public string Name { get; set; } = default!;
+        [Required]
+        [MaxLength(150)]
+        public string NameAr { get; set; } = default!;
 
         [Required]
         [MaxLength(1000)]

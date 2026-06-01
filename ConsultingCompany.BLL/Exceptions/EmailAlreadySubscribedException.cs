@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ConsultingCompany.BLL.Exceptions
 {
-    public class EmailAlreadySubscribedException(string email)
-    : ConflictException($"Email {email} is already subscribed")
+    public class EmailAlreadySubscribedException(string message)
+    : ConflictException(message)
     {
     }
 }

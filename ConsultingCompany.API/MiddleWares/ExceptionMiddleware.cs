@@ -1,5 +1,7 @@
 ﻿using ConsultingCompany.BLL.Exceptions.Base;
+using ConsultingCompany.Shared.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 
 namespace ConsultingCompany.API.MiddleWares
@@ -8,12 +10,15 @@ namespace ConsultingCompany.API.MiddleWares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
         public ExceptionMiddleware(RequestDelegate next,
-            ILogger<ExceptionMiddleware> logger)
+            ILogger<ExceptionMiddleware> logger,
+            IStringLocalizer<SharedResource> localizer)
         {
             _next = next;
             _logger = logger;
+            _localizer = localizer;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -53,7 +58,8 @@ namespace ConsultingCompany.API.MiddleWares
         {
             var problem = new ProblemDetails
             {
-                Title = "Error While Processing The HTTP Request",
+                Title = _localizer[SharedResourcesKeys.UnexpectedError],
+                    
                 Detail = ex.Message,
                 Instance = httpContext.Request.Path,
                 Status = ex switch
@@ -78,8 +84,8 @@ namespace ConsultingCompany.API.MiddleWares
             {
                 var response = new ProblemDetails
                 {
-                    Title = "Error While Processing The HTTP Request - EndPoint Not Found",
-                    Detail = $"Endpoint '{httpContext.Request.Path}' not found",
+                    Title = _localizer[SharedResourcesKeys.EndpointNotFound],              
+                    Detail = _localizer[ SharedResourcesKeys.EndpointNotFound],   
                     Status = StatusCodes.Status404NotFound,
                     Instance = httpContext.Request.Path
                 };

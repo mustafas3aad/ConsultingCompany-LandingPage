@@ -9,17 +9,8 @@ namespace ConsultingCompany.DAL.Specifications.Services
         public ServicesWithPaginationSpecification(
             ServiceQueryParams param)
 
-            : base(s =>
-
-                s.IsActive
-
-                &&
-
-                (string.IsNullOrEmpty(param.Search)
-                ||
-                s.Name.ToLower()
-                .Contains(param.Search.ToLower()))
-            )
+            : base(s => s.IsActive && (string.IsNullOrEmpty(param.Search)
+                || s.Name.ToLower().Contains(param.Search.ToLower())))  
         {
             ApplyPagination(
                 param.PageSize,

@@ -4,8 +4,11 @@ using ConsultingCompany.BLL.DTOs.Services;
 using ConsultingCompany.DAL.Entities;
 using ConsultingCompany.DAL.Specifications.Services;
 using ConsultingCompany.DAL.UnitOfWork;
+using ConsultingCompany.Shared.Localization;
 using ConsultingCompany.Shared.Pagination;
 using ConsultingCompany.Shared.QueryParams.services;
+using Microsoft.Extensions.Localization;
+
 
 namespace ConsultingCompany.BLL.Services
 {
@@ -14,6 +17,7 @@ namespace ConsultingCompany.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
+     
 
         public ServiceService(
             IUnitOfWork unitOfWork,
@@ -21,6 +25,7 @@ namespace ConsultingCompany.BLL.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            
         }
 
         public async Task<PaginatedResult<ServiceDto>>

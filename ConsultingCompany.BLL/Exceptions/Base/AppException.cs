@@ -34,10 +34,4 @@ namespace ConsultingCompany.BLL.Exceptions.Base
        : AppException(messageKey, args)
     { }
 
-
-
-
-
-
-
 }

@@ -1,20 +1,20 @@
 [
   {
     "Name": "Business Consulting",
+    "NameAr": "استشارات الأعمال",
     "Description": "Strategic consulting for businesses looking to grow and scale effectively.",
-    "IconName": "fa-briefcase",
     "IsActive": true
   },
   {
     "Name": "Financial Advisory",
+    "NameAr": "الاستشارات المالية",
     "Description": "Expert financial planning and investment advisory services.",
-    "IconName": "fa-chart-line",
     "IsActive": true
   },
   {
     "Name": "IT Consulting",
+    "NameAr": "استشارات تقنية المعلومات",
     "Description": "Technology solutions and digital transformation consulting.",
-    "IconName": "fa-laptop-code",
     "IsActive": true
   }
 ]

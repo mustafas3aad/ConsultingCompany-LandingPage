@@ -14,11 +14,6 @@ namespace ConsultingCompany.DAL.Data.Configurations
             builder.ToTable("ConsultationRequests", Tb =>
             {
                 Tb.HasCheckConstraint(
-                    "CK_ConsultationRequest_Phone",
-                    "Phone LIKE '01[0125][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'"
-                );
-
-                Tb.HasCheckConstraint(
                     "CK_ConsultationRequest_Email",
                     "Email LIKE '_%@_%._%'"
                 );
@@ -37,16 +32,11 @@ namespace ConsultingCompany.DAL.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(256);
 
-            builder.Property(x => x.Phone)
-                   .IsRequired()
-                   .HasMaxLength(20);
-
             builder.Property(x => x.CompanyName)
                    .IsRequired()
                    .HasMaxLength(200);
 
             builder.Property(x => x.Message)
-                   .IsRequired()
                    .HasMaxLength(2000);
 
             builder.Property(x => x.Status)

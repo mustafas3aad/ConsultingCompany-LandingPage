@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ConsultingCompany.BLL.DTOs.Services;
 using ConsultingCompany.DAL.Entities;
+using System.Globalization;
 
 namespace ConsultingCompany.BLL.Mapping
 {
@@ -8,7 +9,14 @@ namespace ConsultingCompany.BLL.Mapping
     {
         public ServiceProfile()
         {
-            CreateMap<Service, ServiceDto>();
+            CreateMap<Service, ServiceDto>()
+                    .ForMember(dest => dest.Name,
+                        opt => opt.MapFrom(src =>
+                            CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar"
+                                ? src.NameAr
+                                : src.Name
+                        )
+                    );
         }
     }
 }
